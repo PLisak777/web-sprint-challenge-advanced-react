@@ -14,7 +14,6 @@ componentDidMount() {
     this.setState({
       plants: res.data.plantsData
     })
-    console.log('pl: plantslist.js: CDM: results', this.state.plants)
   })
 }
 
