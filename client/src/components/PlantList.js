@@ -1,10 +1,27 @@
-import React, { Component } from "react";
+import React from "react";
 import axios from "axios";
 
-export default class PlantList extends Component {
+export default class PlantList extends React.Component {
   // add state with a property called "plants" - initialize as an empty array
+  state = {
+    plants: []
+  }
 
   // when the component mounts:
+  componentDidMount() {
+    fetch('http://localhost:3333/plants')
+    .then((res) => res.json())
+    .then((json) => {
+      this.setState({
+        plants: json.plantsData
+      })
+      console.log('PL: PlantList.js: PlantList: CDM: fetch result', json);
+      console.log(this.state.plants)
+      if (json.status !== 'error') {
+        this.setState({ plants: json.message });
+      }
+    }) 
+  }
   //   - fetch data from the server endpoint - http://localhost:3333/plants
   //   - set the returned plants array to this.state.plants
 
